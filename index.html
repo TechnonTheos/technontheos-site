@@ -111,6 +111,15 @@
 
   <div class="projects">
     <article class="card project">
+      <div class="tag active">In progress</div>
+      <h3>Home lab network audit: central login &amp; segmented firewall</h3>
+      <p><b>Problem:</b> Every device shared one local login, and the documentation had drifted from what the devices actually ran.</p>
+      <p><b>Built:</b> An audit of configs, firewall and logs against live devices, with findings ranked by risk. So far: an MFA jump host, a TACACS+/RADIUS server on its own management VLAN and firewall zone, and central login plus command accounting on the first router.</p>
+      <p class="chips"><span>TACACS+</span><span>RADIUS</span><span>AAA</span><span>Zone-based firewall</span><span>Change management</span></p>
+      <a class="more" href="docs/netops-audit.html">Read the write-up →</a>
+    </article>
+
+    <article class="card project">
       <div class="tag done">Published</div>
       <h3>Multi-site troubleshooting lab</h3>
       <p><b>Problem:</b> Find and fix faults across an HQ, branch, and data center network.</p>
@@ -231,12 +240,13 @@
     <!-- NEW WEEK: copy this block, paste it at the top, and edit it -->
     <article class="card update">
       <span class="when">Week of Nov 9, 2026</span>
-      <h3>Launched technontheos.com</h3>
+      <h3>Launched technontheos.com and a private project hub</h3>
       <ul>
-        <li>Registered the domain on Cloudflare and deployed this site on Cloudflare Pages, alongside my self-hosted Home Assistant.</li>
-        <li>Continued the physical lab build and console bring-up.</li>
+        <li>Deployed this site from GitHub, alongside my self-hosted Home Assistant.</li>
+        <li>Built a private project tracker in a Proxmox container, published through a Cloudflare Tunnel and locked with Cloudflare Access (zero trust), with weekly backups.</li>
+        <li>Published my home lab network audit: central TACACS+/RADIUS login and a segmented management zone.</li>
       </ul>
-      <p class="next"><b>Next:</b> Push the lab configs and Ansible playbooks to GitHub.</p>
+      <p class="next"><b>Next:</b> Roll central login out to the remaining switches and the wireless controller.</p>
     </article>
     <article class="card update">
       <span class="when">October 2026</span>
