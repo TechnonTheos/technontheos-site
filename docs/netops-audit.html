@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Home Lab Network Audit | Nathan Treadway</title>
+<meta name="description" content="Home lab network audit: centralized device login with TACACS+/RADIUS, a segmented zone-based firewall, and prioritized remediation.">
+<link rel="stylesheet" href="../assets/style.css">
+</head>
+<body>
+<header class="top">
+  <div class="wrap nav">
+    <a class="brand" href="../index.html">technontheos</a>
+    <nav>
+      <a href="../about.html">About</a>
+      <a href="../index.html#projects">Projects</a>
+      <a href="../docs.html">Documents</a>
+      <a href="../index.html#updates">Updates</a>
+      <a href="../index.html#contact">Contact</a>
+    </nav>
+  </div>
+</header>
+<main>
+<section class="hero wrap">
+  <p class="eyebrow">Write-up · Nov 2026</p>
+  <h1>Home Lab Network Audit: Centralized Device Login and a Segmented Firewall</h1>
+  <p class="lead">I audited my home lab of enterprise switches, routers and a wireless controller, then prioritized and fixed what I found, starting with management-plane security.</p>
+</section>
+
+<section class="wrap">
+  <div class="card">
+    <h2>The problem</h2>
+    <p>I run a home lab of enterprise switches, routers and a wireless controller attached to my home network. I audited its documentation, saved configurations and firewall for blind spots, because every device relied on one shared local account and the records had drifted from what the devices actually ran.</p>
+  </div>
+
+  <div class="card">
+    <h2>Method</h2>
+    <p>I compared documentation and saved configurations against live device output, read the gateway's firewall policy through its read-only API, and replayed two weeks of centralized logs against the alert rules. Every change followed four parts: pre-checks, implementation, verification and rollback, guided by deny-by-default firewall practice (NIST SP 800-41).</p>
+    <p><em>Planned and verified with an AI assistant; all changes applied by me.</em></p>
+  </div>
+
+  <div class="card">
+    <h2>Key findings</h2>
+    <ul>
+      <li>Device logins used one shared local account: no central authentication and no audit trail.</li>
+      <li>Documentation said two edge routers had identical access lists. On the devices, one list was truncated and the other was missing.</li>
+      <li>An automatic gateway update converted the firewall to a zone-based model. I reviewed all 139 migrated policies and confirmed none was lost or changed.</li>
+      <li>New custom firewall zones do not allow reply traffic by default, which would have silently dropped server responses.</li>
+      <li>One alert rule caused most of the noise; seven others had never been tested.</li>
+    </ul>
+  </div>
+
+  <div class="card">
+    <h2>Prioritization</h2>
+    <p>I ranked items by risk to the shared home network, effort, and what each one unblocked. Management-plane security came first: highest risk and a prerequisite for later projects. Anything that could affect family connectivity was staged with a one-step rollback.</p>
+  </div>
+
+  <div class="grid2">
+    <div class="card">
+      <h2>Done</h2>
+      <ul>
+        <li>A hardened jump host requiring an SSH key plus a one-time code.</li>
+        <li>A TACACS+ and RADIUS server on a dedicated management VLAN.</li>
+        <li>That VLAN moved into its own firewall zone with explicit, logged policies, prepared while empty and cut over in one step.</li>
+        <li>Central login and command accounting on the first router, with a console-only break-glass account.</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h2>Planned</h2>
+      <ul>
+        <li>Central login on the remaining routers, switches and wireless controller.</li>
+        <li>802.1X on access ports.</li>
+        <li>Rebuilding one router's edge filters.</li>
+        <li>Alert tuning.</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="card">
+    <h2>Skills and tools</h2>
+    <p class="chips"><span>Cisco IOS</span><span>TACACS+</span><span>RADIUS</span><span>AAA method lists</span><span>Extended ACLs</span><span>Zone-based firewall policy</span><span>VLAN segmentation</span><span>SSH hardening</span><span>MFA</span><span>nftables</span><span>Linux containers</span><span>Proxmox</span><span>Tailscale</span><span>Grafana</span><span>Loki</span><span>Syslog</span><span>REST API auditing</span><span>Change management</span><span>Technical documentation</span></p>
+  </div>
+
+  <div class="card looking">
+    <h2>What I learned</h2>
+    <p>Verify against the device and the server's own logs, never against the documentation or a counter that merely looks healthy.</p>
+  </div>
+</section>
+</main>
+<footer class="wrap foot">© 2026 Nathan Treadway · technontheos.com</footer>
+</body>
+</html>
