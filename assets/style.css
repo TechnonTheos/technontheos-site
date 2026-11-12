@@ -55,3 +55,15 @@ ul{padding-left:20px;margin:0;color:var(--muted)}
 .steps li{margin-bottom:10px}
 .steps b{color:var(--text)}
 .timeline .when{display:block}
+.project .when{display:block;margin-bottom:4px}
+.roadmap{width:100%;border-collapse:collapse;font-size:14px}
+.roadmap th{text-align:left;color:var(--muted);font-weight:600;padding:6px 8px;border-bottom:1px solid var(--line)}
+.roadmap td{padding:8px;border-bottom:1px solid var(--line);color:var(--muted);vertical-align:top}
+.roadmap td:nth-child(2){color:var(--text);font-weight:600;white-space:nowrap}
+@media(max-width:640px){.roadmap td:nth-child(2){white-space:normal}.roadmap th:nth-child(3),.roadmap td:nth-child(3){display:none}}
+.roadmap td:first-child{white-space:nowrap}
+.st{font-size:12px;font-weight:700;padding:2px 8px;border-radius:99px;white-space:nowrap}
+.st.done{background:rgba(63,185,80,.15);color:var(--ok)}
+.st.wip{background:rgba(210,153,34,.15);color:var(--wip)}
+.st.plan{background:rgba(88,166,255,.15);color:var(--plan)}
+@media(max-width:640px){.roadmap th:nth-child(4),.roadmap td:nth-child(4){display:none}.roadmap th:nth-child(3),.roadmap td:nth-child(3){display:table-cell}}
