@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Home Lab Network Audit | Nathan Treadway</title>
+<title>Home Lab Network Audit | Nathan Treadway, CCNA</title>
 <meta name="description" content="Home lab network audit: centralized device login with TACACS+/RADIUS, a segmented zone-based firewall, and prioritized remediation.">
 <meta property="og:type" content="website">
 <meta property="og:title" content="Home Lab Network Audit | Nathan Treadway">
@@ -16,13 +16,14 @@
 <body>
 <header class="top">
   <div class="wrap nav">
-    <a class="brand" href="../index.html">technontheos</a>
+    <a class="brand" href="/">technontheos</a>
     <nav>
-      <a href="../about.html">About</a>
-      <a href="../index.html#projects">Projects</a>
-      <a href="../docs.html">Documents</a>
-      <a href="../index.html#updates">Updates</a>
-      <a href="../index.html#contact">Contact</a>
+      <a href="/about.html">About</a>
+      <a href="/#projects">Projects</a>
+      <a href="/#lab">Lab</a>
+      <a href="/docs.html">Documents</a>
+      <a href="/#updates">Updates</a>
+      <a href="/#contact">Contact</a>
     </nav>
   </div>
 </header>
@@ -42,16 +43,15 @@
   <div class="card">
     <h2>Method</h2>
     <p>I compared documentation and saved configurations against live device output, read the gateway's firewall policy through its read-only API, and replayed two weeks of centralized logs against the alert rules. Every change followed four parts: pre-checks, implementation, verification and rollback, guided by deny-by-default firewall practice (NIST SP 800-41).</p>
-    <p><em>Planned and verified with an AI assistant; all changes applied by me.</em></p>
   </div>
 
   <div class="card">
     <h2>Key findings</h2>
     <ul>
-      <li>Device logins used one shared local account: no central authentication and no audit trail.</li>
+      <li>Device logins used one shared local account, with no central authentication and no audit trail. This was remediated by moving devices to central TACACS+ login, starting with the first router.</li>
       <li>Documentation said two edge routers had identical access lists. On the devices, one list was truncated and the other was missing.</li>
       <li>An automatic gateway update converted the firewall to a zone-based model. I reviewed all 139 migrated policies and confirmed none was lost or changed.</li>
-      <li>New custom firewall zones do not allow reply traffic by default, which would have silently dropped server responses.</li>
+      <li>New custom firewall zones did not allow reply traffic by default, which would have silently dropped server responses. This was caught and handled before cutover.</li>
       <li>One alert rule caused most of the noise; seven others had never been tested.</li>
     </ul>
   </div>
@@ -74,9 +74,8 @@
     <div class="card">
       <h2>Planned</h2>
       <ul>
-        <li>Central login on the remaining routers, switches and wireless controller.</li>
-        <li>802.1X on access ports.</li>
-        <li>Rebuilding one router's edge filters.</li>
+        <li>Extend central login to the rest of the lab.</li>
+        <li>Further access-control hardening.</li>
         <li>Alert tuning.</li>
       </ul>
     </div>
@@ -91,6 +90,7 @@
     <h2>What I learned</h2>
     <p>Verify against the device and the server's own logs, never against the documentation or a counter that merely looks healthy.</p>
   </div>
+  <p class="sub" style="margin-top:16px"><em>Planned and verified with an AI assistant; all changes applied by me.</em></p>
 </section>
 </main>
 <footer class="wrap foot">© 2026 Nathan Treadway · technontheos.com</footer>
