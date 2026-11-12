@@ -67,3 +67,4 @@ ul{padding-left:20px;margin:0;color:var(--muted)}
 .st.wip{background:rgba(210,153,34,.15);color:var(--wip)}
 .st.plan{background:rgba(88,166,255,.15);color:var(--plan)}
 @media(max-width:640px){.roadmap th:nth-child(4),.roadmap td:nth-child(4){display:none}.roadmap th:nth-child(3),.roadmap td:nth-child(3){display:table-cell}}
+.diagram{width:100%;height:auto;border-radius:8px;background:#fff;margin:6px 0 10px;border:1px solid var(--line)}
